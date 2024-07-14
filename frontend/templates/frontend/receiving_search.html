@@ -1,0 +1,508 @@
+{% extends "frontend/base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}
+Receiving Data Collection
+{% endblock %}
+
+{% block content %}
+
+<!-- For Every Pages Start -->
+<!-- Nav Bar Start-->
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="{% url 'frontend:index' %}">Rainbow Cat Alpha</a>
+    <!-- Sidebar Toggle-->
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+    <!-- Navbar Search-->
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+    <!-- Navbar-->
+    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#!">Settings</a></li>
+                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#!">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+  </nav>
+  <div id="layoutSidenav">    
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" href="{% url 'frontend:index' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard
+                    </a>
+                    <div class="sb-sidenav-menu-heading">Services</div>
+                    <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsReceiving" aria-expanded="true" aria-controls="collapseLayoutsReceiving">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-video"></i></div>
+                        Receiving
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse show" id="collapseLayoutsReceiving" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link active" href="{% url 'frontend:receiving' %}">Data Recording</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsDelivering" aria-expanded="false" aria-controls="collapseLayoutsReceiving">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-table"></i></div>
+                        Delivering
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutsDelivering" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'frontend:delivery_add_data' %}">Create Delivery Data</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-database"></i></div>
+                        Data Analysing
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'frontend:receiving_search' %}">Searching</a>
+                            <a class="nav-link" href="{% url 'frontend:compare_view' %}">Comparing</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Pages
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                Authentication
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="login.html">Login</a>
+                                    <a class="nav-link" href="register.html">Register</a>
+                                    <a class="nav-link" href="password.html">Forgot Password</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                Error
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="401.html">401 Page</a>
+                                    <a class="nav-link" href="404.html">404 Page</a>
+                                    <a class="nav-link" href="500.html">500 Page</a>
+                                </nav>
+                            </div>
+                        </nav>
+                    </div>                    
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                Administrator
+            </div>
+        </nav>
+    </div>
+<!-- Nav Bar End-->
+<!-- Main Content Start -->
+    <div id="layoutSidenav_content" class="bg-secondary bg-opacity-25">
+        <main>
+            <div class="container-fluid px-4 col-xl-6 col-lg-8 col-md-8 offset-lg-2 offset-xl-3 offset-md-2">
+                
+                {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == 'success' %}
+                                <div class="alert alert-success my-3">
+                                    <ul class="messages">
+                                        <li>{{ message }}</li>
+                                    </ul>
+                                </div>
+                            {% else %}
+                                <div class="alert alert-danger my-3">
+                                    <ul class="messages">
+                                        <li>{{ message }}</li>
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active"></li>
+                </ol>
+
+    <!-- Comparing Box Section Start -->
+        <section class="mb-4">
+            <div class="card">
+                    <div class="card-header text-center py-3">
+                    <h5 class="mb-0 text-center">
+                        <strong>Searching Recorded Data</strong>
+                    </h5>
+                    </div>
+                <div class="card-body">                  
+                    <form method="get" class="form-inline">
+                        <div class="row">
+                            <!-- Start Date Field -->
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.from_date.label_tag }}
+                                {{ form.from_date }}
+                                {% if form.from_date.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.from_date.errors %}
+                                            {{ error }}<br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                
+                            <!-- End Date Field -->
+                            <div class="form-group col-md-6 mb-2">
+                                {{ form.to_date.label_tag }}
+                                {{ form.to_date }}
+                                {% if form.to_date.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.to_date.errors %}
+                                            {{ error }}<br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                                     <!-- Trip Number Field -->
+                                    <div class="form-group col-md-6 mb-2">
+                                        {{ form.trip_number.label_tag }}
+                                        {{ form.trip_number }}
+                                        {% if form.trip_number.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {% for error in form.trip_number.errors %}
+                                                    {{ error }}<br>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                        
+                                    <!-- Invoice Number Field -->
+                                    <div class="form-group col-md-6 mb-2">
+                                        {{ form.invoice_number.label_tag }}
+                                        {{ form.invoice_number }}
+                                        {% if form.invoice_number.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {% for error in form.invoice_number.errors %}
+                                                    {{ error }}<br>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                        
+                                    <!-- Container Number Field -->
+                                    <div class="form-group col-md-6 mb-2">
+                                        {{ form.container_number.label_tag }}
+                                        {{ form.container_number }}
+                                        {% if form.container_number.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {% for error in form.container_number.errors %}
+                                                    {{ error }}<br>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                        
+                                    <!-- Plate Number Field -->
+                                    <div class="form-group col-md-6 mb-2">
+                                        {{ form.plate_number.label_tag }}
+                                        {{ form.plate_number }}
+                                        {% if form.plate_number.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {% for error in form.plate_number.errors %}
+                                                    {{ error }}<br>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                        
+                                    <!-- Location Field -->
+                                    <div class="form-group col-md-6 mb-3">
+                                        {{ form.location.label_tag }}
+                                        {{ form.location }}
+                                        {% if form.location.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {% for error in form.location.errors %}
+                                                    {{ error }}<br>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <!-- Stack Num Field -->
+                                    <div class="form-group col-md-6 mb-3">
+                                        {{ form.stack_number.label_tag }}
+                                        {{ form.stack_number }}
+                                        {% if form.stack_number.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {% for error in form.stack_number.errors %}
+                                                    {{ error }}<br>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                </div>
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success mb-2 px-5"> <i class="fa-solid fa-sort"></i> Filter</button>
+                        </div>
+                    </form>
+                    <!-- Must choose both select to submit form (Filter)-->
+                    
+                </div>
+               </div>
+               <!--result start-->
+                <div class="card-footer mt-3">
+                    <div class="alert alert-secondary" role="alert">
+                        <div class="row justify-content-between align-items-center">
+                            <div class="col-md-3 col-lg-3 col-sm-12 text-lg-left text-md-left text-center mb-md-0 align-items-center">                            
+                                <nav aria-label="Page navigation mb-0 text-success">
+                                    <ul class="pagination justify-content-center justify-content-md-start mb-0">
+                                        {% if page_obj.has_previous %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page=1" aria-label="First">
+                                                    <span aria-hidden="true">&laquo;&laquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" aria-label="First">
+                                                    <span aria-hidden="true">&laquo;&laquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                
+                                        {% for num in page_obj.paginator.page_range %}
+                                            {% if num == 1 or num == page_obj.paginator.num_pages %}
+                                                {% if page_obj.number == num %}
+                                                    <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+                                                {% else %}
+                                                    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                                {% endif %}
+                                            {% elif num >= page_obj.number|add:"-2" and num <= page_obj.number|add:"2" %}
+                                                {% if page_obj.number == num %}
+                                                    <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+                                                {% else %}
+                                                    <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                                {% endif %}
+                                            {% elif num == 2 or num == page_obj.paginator.num_pages|add:"-1" %}
+                                                <li class="page-item"><a class="page-link" href="?page={{ num }}">...</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                
+                                        {% if page_obj.has_next %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                                                    <span aria-hidden="true">&raquo;&raquo;</span>
+                                                </a>
+                                            </li>
+                                        {% else %}
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                            <li class="page-item disabled">
+                                                <a class="page-link" href="#" aria-label="Last">
+                                                    <span aria-hidden="true">&raquo;&raquo;</span>
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                                
+                            </div>
+                            
+                            <div class="col-md-3 col-lg-3 col-sm-12 text-lg-right text-md-right text-center">
+                                <span>Found <span class="badge bg-success">{{ count }}</span> items</span>
+                            </div>
+                        </div>
+                    </div>              
+                    <div class="table-responsive">
+                        <table class="table table-hover text-nowrap bg-white" style="width:100%">
+                            <thead class="bg-success bg-opacity-10">
+                                <tr class="text-center">
+                                    <th>ID</th>
+                                    <th>Model</th>
+                                    <th>Count</th>
+                                    <th>Location</th>
+                                    <th>More</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for case in page_obj %}
+                                    <tr class="text-center">
+                                        <td>{{ case.id }}</td>
+                                        <td>
+                                            {% for item in case.cases_list.all %}
+                                                {{ item.case_model }}<br>
+                                            {% endfor %}
+                                        </td>
+                                        <td>
+                                            {% for item in case.cases_list.all %}
+                                                {{ item.case_model_count }}<br>
+                                            {% endfor %}
+                                        </td>
+                                        <td>{{ case.location.location }}</td>
+                                        
+                                        <td>
+                                            <button class="btn btn-success btn-sm" onclick="toggleDetails(this)">Details</button>
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center detail-row d-none">
+                                        <td colspan="5">
+                                            <div class="row">                                                
+                                                <div class="col-6 text-start ps-5">
+                                                    Stack: <strong>{{ case.stack_num }}</strong>
+                                                </div>   
+                                                <div class="col-6 text-start">
+                                                    Trip: <strong>{{ case.trip_num }}</strong>
+                                                </div>                                             
+                                                <div class="col-lg-6 text-start ps-5">
+                                                    License: <strong>{{ case.plate_num }}</strong>
+                                                </div>                                                
+                                                <div class="col-lg-6 text-start">
+                                                    Container: <strong>{{ case.container_num }}</strong>
+                                                </div>
+                                                <div class="col-lg-6 text-start ps-5">
+                                                    Invoice: <strong>{{ case.invoice_num }}</strong>
+                                                </div>
+                                                <div class="col-lg-6 text-start">
+                                                    Created At: <strong>{{ case.created_at }}</strong>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <script>
+                        function toggleDetails(button) {
+                            var detailRow = button.closest('tr').nextElementSibling;
+                            detailRow.classList.toggle('d-none');
+                        }
+                    </script>
+                    
+                        <div class="alert alert-secondary mt-3" role="alert">
+                            <div class="row justify-content-between align-items-center">
+                                <div class="col-md-3 col-lg-3 col-sm-12 text-lg-left text-md-left text-center mb-md-0 align-items-center">                            
+                                    <nav aria-label="Page navigation mb-0 text-success">
+                                        <ul class="pagination justify-content-center justify-content-md-start mb-0">
+                                            {% if page_obj.has_previous %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page=1" aria-label="First">
+                                                        <span aria-hidden="true">&laquo;&laquo;</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" aria-label="First">
+                                                        <span aria-hidden="true">&laquo;&laquo;</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" aria-label="Previous">
+                                                        <span aria-hidden="true">&laquo;</span>
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                    
+                                            {% for num in page_obj.paginator.page_range %}
+                                                {% if num == 1 or num == page_obj.paginator.num_pages %}
+                                                    {% if page_obj.number == num %}
+                                                        <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+                                                    {% else %}
+                                                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                                    {% endif %}
+                                                {% elif num >= page_obj.number|add:"-2" and num <= page_obj.number|add:"2" %}
+                                                    {% if page_obj.number == num %}
+                                                        <li class="page-item active"><a class="page-link" href="#">{{ num }}</a></li>
+                                                    {% else %}
+                                                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                                    {% endif %}
+                                                {% elif num == 2 or num == page_obj.paginator.num_pages|add:"-1" %}
+                                                    <li class="page-item"><a class="page-link" href="?page={{ num }}">...</a></li>
+                                                {% endif %}
+                                            {% endfor %}
+                                    
+                                            {% if page_obj.has_next %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                                                        <span aria-hidden="true">&raquo;&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            {% else %}
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                        <span aria-hidden="true">&raquo;</span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item disabled">
+                                                    <a class="page-link" href="#" aria-label="Last">
+                                                        <span aria-hidden="true">&raquo;&raquo;</span>
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <div class="col-md-3 col-lg-3 col-sm-12 text-lg-right text-md-right text-center">
+                                    <span>Found <span class="badge bg-success">{{ count }}</span> items</span>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                    </div>
+                <!-- Result End -->
+        </section>
+</div>             
+</main>
+
+
+
+
+{% endblock %}

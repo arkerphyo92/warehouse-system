@@ -1,0 +1,295 @@
+{% extends "frontend/base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}
+Receiving Data Collection
+{% endblock %}
+
+{% block content %}
+
+<!-- For Every Pages Start -->
+<!-- Nav Bar Start-->
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="index.html">Honda Repir</a>
+    <!-- Sidebar Toggle-->
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+    <!-- Navbar Search-->
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+    <!-- Navbar-->
+    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#!">Settings</a></li>
+                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#!">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+  </nav>
+  <div id="layoutSidenav">    
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" href="{% url 'frontend:index' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard
+                    </a>
+                    <div class="sb-sidenav-menu-heading">Services</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsReceiving" aria-expanded="false" aria-controls="collapseLayoutsReceiving">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Receiving
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutsReceiving" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'frontend:receiving' %}">Start Session</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsDelivering" aria-expanded="false" aria-controls="collapseLayoutsReceiving">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-table"></i></div>
+                        Delivering
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutsDelivering" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'frontend:delivery_add_data' %}">Start Session</a>
+                        </nav>
+                    </div>
+                    <div class="sb-sidenav-menu-heading">Interface</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Comparison
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'frontend:compare_view' %}">Comparing</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Pages
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                Authentication
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="login.html">Login</a>
+                                    <a class="nav-link" href="register.html">Register</a>
+                                    <a class="nav-link" href="password.html">Forgot Password</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                Error
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="401.html">401 Page</a>
+                                    <a class="nav-link" href="404.html">404 Page</a>
+                                    <a class="nav-link" href="500.html">500 Page</a>
+                                </nav>
+                            </div>
+                        </nav>
+                    </div>                    
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                Administrator
+            </div>
+        </nav>
+    </div>
+<!-- Nav Bar End-->
+
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">  
+            <h3 class="mt-4">Receiving (Step - Two)  
+            </h3>
+            {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'success' %}
+                            <div class="alert alert-success mt-3 mb-0 pb-0">
+                                <ul class="messages">
+                                    <li>{{ message }}</li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-warning mt-3 mb-0 pb-0">
+                                <ul class="messages">
+                                    <li>{{ message }}</li>
+                                </ul>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active"></li>
+            </ol>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card bg-primary  {% if ai_results %}bg-opacity-25{% else %}bg-opacity-75{%endif%} text-white mb-4">
+                        <div class="card-body">
+                           <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                                <div class="input-group">
+                                  <input type="file" class="form-control" id="imageFile" name="imageFile" accept="image/*" required>
+                                  <button type="submit" class="btn {% if ai_results %}btn-secondary{% else %}btn-primary{%endif%} input-group-append">Upload Image</button>
+                                </div>                            
+                           </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</div>             
+</main>
+
+<!-- For Every Pages End -->
+
+<div>
+    <main>
+        <div class="container-fluid px-4">
+        <section class="mb-2">                    
+            <div class="card text-white bg-opacity-75 bg-primary">
+                    <div class="card-header text-center py-3">
+                    <h5 class="text-center mb-0">
+                        <a href="{% url 'frontend:receiving' %}" class="text-white">Current Receiving Data
+                        <span><i class="fa-solid fa-pen-to-square text-white ps-3"></i></a></span>
+                    </h5>
+                    </div>
+                <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="mb-3 col-6 col-sm-6 col-md-3">
+                                    <span title="Trip Number"><label for="trip_number" class="form-label d-none d-sm-block">Trip :</label>
+                                        <div class="input-group">
+                                            <input name="trip_number" value="{{ inputed_trip_number }}" class="bg-white form-control border-success" disabled>
+                                            <span class="input-group-text border-success">
+                                                <i class="fa-solid fa-circle-check text-success"></i>
+                                            </span>
+                                        </div>
+                                  </div>
+                                  <div class="mb-3 col-6 col-sm-6 col-md-3">
+                                    <label for="plate_num" class="form-label d-none d-sm-block">License :</label>
+                                    <div class="input-group">
+                                        <input name="plate_num" value="{{ inputed_plate_number }}" class="bg-white form-control border-success" disabled>
+                                        <span class="input-group-text border-success">
+                                            <i class="fa-solid fa-circle-check text-success"></i>
+                                        </span>
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 col-6 col-sm-6 col-md-3">
+                                    <label for="location" class="form-label d-none d-sm-block">Location :</label>
+                                    <div class="input-group">
+                                        <input name="location" value="{{ selected_location }}" class="bg-white form-control border-success" disabled>
+                                        <span class="input-group-text border-success">
+                                            <i class="fa-solid fa-circle-check text-success"></i>
+                                        </span>
+                                    </div>
+                                  </div>
+                                  <div class="mb-3 col-6 col-sm-6 col-md-3">
+                                    <label for="stack" class="form-label d-none d-sm-block">Stack :</label>
+                                    <div class="input-group">
+                                        <input name="stack" value="{{ selected_stack_number }}" class="bg-white form-control border-success" disabled>
+                                        <span class="input-group-text border-success">
+                                            <i class="fa-solid fa-circle-check text-success"></i>
+                                        </span>
+                                    </div>
+                                  </div>                              
+                                <div class="mb-3 col-md-4 col-sm-4">
+                                    <label for="Container" class="form-label d-none d-sm-block">Container Number :</label>
+                                    <div class="input-group">
+                                        <input name="Container" value="{{ inputed_container_num }}" class="bg-white form-control border-success" disabled>
+                                        <span class="input-group-text border-success">
+                                            <i class="fa-solid fa-circle-check text-success"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col-md-4 col-sm-4">
+                                    <label class="form-label d-none d-sm-block" for="invoice_num">Invoice Number :</label>
+                                    <div class="input-group">
+                                        <input name="invoice_num" value="{{ inputed_invoice_num }}" class="bg-white form-control border-success" disabled>
+                                        <span class="input-group-text border-success">
+                                            <i class="fa-solid fa-circle-check text-success"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col-md-4 col-sm-4">
+                                    <label class="form-label d-none d-sm-block" for="imageFile">Image:</label>
+                                    {% if ai_results %}
+                                        <div class="input-group">
+                                            <input name="imageFile" value="{{ selected_image_filename }}" class="bg-white form-control border-success" disabled>
+                                            <span class="input-group-text border-success">
+                                                <i class="fa-solid fa-circle-check text-success"></i>
+                                            </span>
+                                        </div>
+                                    {% else %}
+                                    <div class="input-group">
+                                        <input name="imageFile" value="Not Uploaded Yet!" class="bg-white form-control border-success" disabled>
+                                        <span class="input-group-text border-success">
+                                            <i class="fa-solid fa-circle-xmark text-danger"></i>
+                                        </span>
+                                    </div>
+                                    {% endif %}
+
+                                </div>                          
+                            </div>                            
+                        </div>
+                </div>                
+        </section>
+        {% if ai_results %}
+                        <div class="table-responsive m-0">
+                            <table class="table table-hover text-nowrap border">
+                                <thead class="bg-primary bg-opacity-10">
+                                    <tr>
+                                        <th class="text-center align-middle">Case Model</th>
+                                        <th class="text-center align-middle">Case Count</th>
+                                        <th class="text-center align-middle">Case Code</th>
+                                        <th class="text-center align-middle">Remark</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in ai_results %}
+                                        <tr>
+                                            <td class="text-center">{{ item.case_model }}</td>
+                                            <td class="text-center">{{ item.case_model_count }}</td>
+                                            <td class="text-center">{{ item.case_code }}</td>
+                                            <th class="text-center">AI</th>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table> 
+                        </div>
+                    {% endif %}
+                    <div class="card-footer">
+                        <form method="POST" class="d-flex justify-content-center" name="save_data">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary col-xl-5 col-md-4 col-sm-12" name="save_data" {% if not ai_results %}disabled{% endif %}>
+                                Save
+                            </button>
+                        </form>
+                    </div>
+    </div>
+</main>
+</div>
+
+{% endblock %}

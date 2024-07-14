@@ -1,0 +1,252 @@
+{% extends "frontend/base.html" %}
+{% load static %}
+
+{% block title %}
+Comparison Page
+{% endblock %}
+
+{% block content %}
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="index.html">Honda Repir</a>
+    <!-- Sidebar Toggle-->
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+    <!-- Navbar Search-->
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+    <!-- Navbar-->
+    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#!">Settings</a></li>
+                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#!">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+  </nav>
+  <div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" href="{% url 'frontend:index' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard
+                    </a>
+                    <div class="sb-sidenav-menu-heading">Services</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsReceiving" aria-expanded="false" aria-controls="collapseLayoutsReceiving">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Receiving
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutsReceiving" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'frontend:receiving' %}">Start Session</a>
+                        </nav>
+                    </div>
+                    <div class="sb-sidenav-menu-heading">Interface</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Comparison
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'frontend:add_inventory' %}">Add New Inventory</a>
+                            <a class="nav-link" href="{% url 'frontend:add_new' %}">Add New Images</a>
+                            <a class="nav-link" href="{% url 'frontend:compare_view' %}">Comparing</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Pages
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                Authentication
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="login.html">Login</a>
+                                    <a class="nav-link" href="register.html">Register</a>
+                                    <a class="nav-link" href="password.html">Forgot Password</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                Error
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="401.html">401 Page</a>
+                                    <a class="nav-link" href="404.html">404 Page</a>
+                                    <a class="nav-link" href="500.html">500 Page</a>
+                                </nav>
+                            </div>
+                        </nav>
+                    </div>                    
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                Administrator
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Add New Images</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active"></li>
+                </ol>
+                <div class="row">
+                    <div class="col-xl-6 col-md-6">
+                        <div class="card bg-primary bg-opacity-75 text-white mb-4">
+                            <div class="card-body">
+                                AI Generated <strong>{{ total_cases_list }}</strong> Cases from <strong>{{ total_image_list }}</strong> Images.
+                            </div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="#">Result of {{today}}</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="col-xl-6 col-md-6">
+                        <div class="card bg-success bg-opacity-75 text-white mb-4">
+                            <div class="card-body">User created <strong>{{total_warehousedata_list}}</strong> cases with <strong>{{total_warehousefile_list}}</strong> Inventory.</div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="#">Result of {{today}}</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>                
+                <!-- Comparing Box Section Start -->
+                    <section class="mb-4">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Creating Cases List to Compare with Inventory
+                            </div>
+                            {% if messages %}
+                                {% for message in messages %}
+                                    {% if message.tags == 'success' %}
+                                        <div class="alert alert-success my-3">
+                                            <ul class="messages">
+                                                <li>{{ message }}</li>
+                                            </ul>
+                                        </div>
+                                    {% else %}
+                                        <div class="alert alert-danger my-3">
+                                            <ul class="messages">
+                                                <li>{{ message }}</li>
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                            <div class="card-body">                                
+                                <form method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}                                    
+                                    <!-- CaseImage Form -->
+                                    <div class='row' id="form-container">
+                                        {{ case_image_form1.management_form }}          
+                                                {{ DataForImageCaseFormSet2.management_form }}
+                                                <div class="mb-3">
+                                                    <h6><strong>Adding Cases Images</strong></h6>
+                                                    {% for form in DataForImageCaseFormSet2 %}
+                                                    <div class='row bg-light mb-3 py-3 mx-auto form-item'{% if not forloop.first %} style="display:none;" {% endif %}>                                                    
+                                                            <div class="col-xl-4">
+                                                                {{ form.non_field_errors }}
+                                                                {% if form.image.errors %}<div class="alert alert-danger m-0 pt-2 p-0">{{ form.image.errors }}</div>{% endif %}
+                                                                {{ form.image.label_tag }}
+                                                                {{ form.image }}                                                            
+                                                            </div>
+                                                            <div class="col-xl-4">
+                                                                {{ form.non_field_errors }}
+                                                                {% if form.location.errors %}<div class="alert alert-danger m-0 pt-2 p-0">{{ form.location.errors }}</div>{% endif %}
+                                                                {{ form.location.label_tag }}
+                                                                {{ form.location }}                                                            
+                                                            </div>
+                                                            <div class="col-xl-3">
+                                                                {{ form.non_field_errors }}
+                                                                {% if form.stack_num.errors %}<div class="alert alert-danger m-0 pt-2 p-0">{{ form.stack_num.errors }}</div>{% endif %}
+                                                                {{ form.stack_num.label_tag }}
+                                                                {{ form.stack_num }}                                                            
+                                                            </div>
+                                                            <div class="col-xl-3">
+                                                                {{ form.non_field_errors }}
+                                                                {% if form.trip_num.errors %}<div class="alert alert-danger m-0 pt-2 p-0">{{ form.trip_num.errors }}</div>{% endif %}
+                                                                {{ form.trip_num.label_tag }}
+                                                                {{ form.trip_num }}                                                            
+                                                            </div> 
+                                                            <div class="col-xl-3">
+                                                                {{ form.non_field_errors }}
+                                                                {% if form.container_num.errors %}<div class="alert alert-danger m-0 pt-2 p-0">{{ form.container_num.errors }}</div>{% endif %}
+                                                                {{ form.container_num.label_tag }}
+                                                                {{ form.container_num }}                                                            
+                                                            </div> 
+                                                            <div class="col-xl-3">
+                                                                {{ form.non_field_errors }}
+                                                                {% if form.invoice_num.errors %}<div class="alert alert-danger m-0 pt-2 p-0">{{ form.invoice_num.errors }}</div>{% endif %}
+                                                                {{ form.invoice_num.label_tag }}
+                                                                {{ form.invoice_num }}                                                            
+                                                            </div> 
+                                                    </div>                                                                                                  
+                                                    {% endfor %}
+                                                </div>
+                                        </div> 
+                                        <!-- DataForImageCase Formset -->
+                                    <div class="row">
+                                        <div class="col-6">                                                            
+                                                <button type="button" id="add-form-btn" class="btn btn-success col-4">Add More Images</button>
+                                        </div>
+
+                                        <!-- Submit Button -->
+                                        <div class="col-6">
+                                            <button class="btn btn-primary col-4 float-end" type="submit">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function() {
+                                        var addFormBtn = document.getElementById("add-form-btn");
+                                        var formContainer = document.getElementById("form-container");
+                                        var forms = formContainer.getElementsByClassName("form-item");
+                                        var formIndex = 1;
+                                
+                                        addFormBtn.addEventListener("click", function() {
+                                            if (formIndex < forms.length) {
+                                                forms[formIndex].style.removeProperty("display");
+                                                formIndex++;
+                                            } else {
+                                                addFormBtn.disabled = true;
+                                                addFormBtn.innerText = "No More Image";
+                                            }
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </section>
+                 <!-- Comparing Box Section End -->                 
+            </div>             
+        </main>
+        
+    
+
+
+{% endblock %}

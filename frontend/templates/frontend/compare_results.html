@@ -1,0 +1,326 @@
+{% extends "frontend/base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}
+Data Comparing
+{% endblock %}
+
+{% block content %}
+<!-- Nav Bar Start-->
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="{% url 'frontend:index' %}">Rainbow Cat Alpha</a>
+    <!-- Sidebar Toggle-->
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+    <!-- Navbar Search-->
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+    <!-- Navbar-->
+    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#!">Settings</a></li>
+                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#!">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+  </nav>
+  <div id="layoutSidenav">    
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" href="{% url 'frontend:index' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard
+                    </a>
+                    <div class="sb-sidenav-menu-heading">Services</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsReceiving" aria-expanded="false" aria-controls="collapseLayoutsReceiving">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-video"></i></div>
+                        Receiving
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutsReceiving" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'frontend:receiving' %}">Data Recording</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsDelivering" aria-expanded="false" aria-controls="collapseLayoutsReceiving">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-table"></i></div>
+                        Delivering
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutsDelivering" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'frontend:delivery_add_data' %}">Create Delivery Data</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="true" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-database"></i></div>
+                        Data Analysing
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse show" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'frontend:receiving_search' %}">Searching</a>
+                            <a class="nav-link active" href="{% url 'frontend:compare_view' %}">Comparing</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Pages
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                Authentication
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="login.html">Login</a>
+                                    <a class="nav-link" href="register.html">Register</a>
+                                    <a class="nav-link" href="password.html">Forgot Password</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                Error
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="401.html">401 Page</a>
+                                    <a class="nav-link" href="404.html">404 Page</a>
+                                    <a class="nav-link" href="500.html">500 Page</a>
+                                </nav>
+                            </div>
+                        </nav>
+                    </div>                    
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                Administrator
+            </div>
+        </nav>
+    </div>
+<!-- Nav Bar End-->
+<!-- Main Content Start -->
+    <div id="layoutSidenav_content" class="bg-secondary bg-opacity-25">
+        <main>
+            <div class="container-fluid px-4 col-xl-6 col-lg-8 col-md-8 offset-lg-2 offset-xl-3 offset-md-2">                
+                {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == 'success' %}
+                                <div class="alert alert-success my-3">
+                                    <ul class="messages">
+                                        <li>{{ message }}</li>
+                                    </ul>
+                                </div>
+                            {% else %}
+                                <div class="alert alert-danger my-3">
+                                    <ul class="messages">
+                                        <li>{{ message }}</li>
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                <h3 class="mt-4 text-center"><span class="text-delivery">Delivery Services</span>
+                </h3>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active"></li>
+                </ol>                
+
+    <!-- Comparing Box Section Start -->
+    <section class="mb-4">
+        <div class="card mb-3">
+            <div class="card-header text-center py-3">
+                <h5 class="mb-0 text-center"><strong>Comparing AI with Delivery Plan</strong></h5>
+            </div>
+            <div class="card-body">
+                <link href="{% static 'frontend/compare/select2.min.css'%}" rel="stylesheet" />
+                <form class="align-items-center" method="GET" action="{% url 'frontend:compare_view' %}" onsubmit="return validateForm()">
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="mb-3">
+                                <label for="case_image_file_ids" class="form-label">Select Recorded Data:</label>
+                                <select class="js-select2 form-select" multiple="multiple" name="case_image_file_ids" id="case_image_file_ids" required>
+                                    {% for filename in case_image_file_ides %}
+                                        <option data-badge="" value="{{ filename }}" {% if filename|stringformat:'s' in selected_case_image_file_ids %} selected {% endif %}>{{ filename }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>  
+                            <div class="mb-3">
+                                <label for="warehouse_file_name" class="form-label">Select Dilivery File:</label>
+                                <select class="form-select" name="warehouse_file_name" id="warehouse_file_name" required data-live-search="true">
+                                    <option value="">All</option>
+                                    {% for filename in warehouse_file_names %}
+                                        <option value="{{ filename }}" {% if filename == selected_warehouse_file_name %} selected {% endif %}>{{ filename }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3 d-flex align-items-center justify-content-center">
+                                <button data-mdb-ripple-init type="submit" class="btn btn-delivery mt-4">Compare</button>
+                            </div>
+                            
+                            <script src="{% static 'frontend/compare/js/jquery.min.js'%}"></script>
+                            <script src="{% static 'frontend/compare/js/popper.js'%}"></script>
+                            <script src="{% static 'frontend/compare/js/select2.min.js'%}"></script>
+                            <script src="{% static 'frontend/compare/js/main.js'%}"></script>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% if selected_case_image_file_ids and selected_warehouse_file_name %}
+        
+        <div class="alert bg-white bg-opacity-50 pb-0">
+             <!-- Alert Boxes Start -->
+             <div class="row justify-content-between mb-3">
+                {% if selected_case_image_file_ids and selected_warehouse_file_name %}
+                    <div class="text-success col-6">
+                        {{in_both|length}} Common Cases
+                    </div>
+                    <div class="text-danger col-6 text-end">
+                        {% if selected_case_image_file_ids or selected_warehouse_file_name %} {{total_discrepancies}}{% endif %} Discrepencies Cases
+                    </div>
+                    
+                {% endif %}
+            </div>
+        <!-- Alert Boxes End--> 
+        </div>
+        <!-- Table Result Start-->
+        
+        <div class="card">
+            <div class="card-body">
+                       
+                <div class="alert alert-primary" role="alert">
+                    <div class="row">
+                        <div class="col-md-7 text-lg-left text-md-left text-sm-left"><strong>{{ cases_list_data_count }} Rows for 
+                           {{selected_case_image_file_ids}}
+                        </strong></div>
+                        <div class="col-md-5 text-lg-right text-md-right text-sm-center"><strong>{{ warehouse_data_set_count }} Rows for {{selected_warehouse_file_name}}</strong></div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+                            <tr>
+                                <th class="text-center align-middle">Model</th>
+                                <th class="text-center align-middle">Count</th>
+                                <th class="text-center align-middle">Loc</th>
+                                <th class="text-center align-middle">Sta</th>
+                                <th class="text-center align-middle">Count</th>
+                                <th class="text-center align-middle">Loc</th>
+                                <th class="text-center align-middle">Sta</th>
+                                <th class="text-center align-middle">Remark</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in only_in_cases_list %}
+                                <tr>
+                                    <td class="text-center text-danger">{{ item.case_model }}</td>
+                                    <td class="text-center text-danger">{{ item.case_model_count }}</td>
+                                    <td class="text-center text-danger">{{ item.data_for_imagecase_image.location.location }}</td>
+                                    <td class="text-center text-danger">{{ item.data_for_imagecase_image.stack_num }}</td>
+                                    <td class="text-center text-danger">-</td>
+                                    <td class="text-center text-danger">-</td>
+                                    <td class="text-center text-danger">-</td>
+                                    <th class="text-center text-danger">AI</th>
+                                </tr>
+                            {% endfor %}
+                            {% for item in only_in_warehouse_data %}
+                                <tr class="text-danger">
+                                    <td class="text-center text-danger">{{ item.case_model }}</td>
+                                    <td class="text-center">-</td>
+                                    <td class="text-center">-</td>
+                                    <td class="text-center">-</td>
+                                    <td class="text-center text-danger">{{ item.case_model_count }}</td>
+                                    <td class="text-center text-danger">{{ item.location.location }}</td>
+                                    <td class="text-center text-danger">{{ item.stack_num }}</td>
+                                    <th class="text-center text-danger">Inventory</th>
+                                </tr>
+                            {% endfor %}
+                            {% for item in in_both %}
+                                <tr>
+                                    {% if item.0.case_model_count != item.1.case_model_count %}
+                                        <td class="text-center text-warning">
+                                    {% else %}
+                                        <td class="text-center text-success">
+                                    {% endif %}
+                                        {{ item.0.case_model }}
+                                    </td>
+                                    <td class="text-center text-success text-center">
+                                        {% if item.0.case_model_count != item.1.case_model_count %}
+                                            <span class="text-danger">{{ item.0.case_model_count }}
+                                                <span class="text-warning p-0 m-0">
+                                                    <small>
+                                                        {% if item.1.case_model_count < item.0.case_model_count %}
+                                                            {% with num1=item.0.case_model_count num2=item.1.case_model_count %}
+                                                                <i class="fa-solid fa-plus-minus fa-xs"></i>{{ num1|subtract:num2 }}
+                                                            {% endwith %}
+                                                        {% endif %}
+                                                    </small>
+                                                </span>
+                                            </span>
+                                        {% else %}
+                                            {{ item.0.case_model_count }}
+                                        {% endif %}
+                                    </td>
+                                    {% if item.0.case_model_count != item.1.case_model_count %}
+                                        <td class="text-center text-danger">{{ item.0.data_for_imagecase_image.location.location }}</td>
+                                        <td class="text-center text-danger">{{ item.0.data_for_imagecase_image.stack_num }}</td>
+                                    {% else %}
+                                        <td class="text-center">{{ item.0.data_for_imagecase_image.location.location }}</td>
+                                        <td class="text-center">{{ item.0.data_for_imagecase_image.stack_num }}</td>
+                                    {% endif %}
+                                    <td class=" text-center">
+                                    {% if item.0.case_model_count != item.1.case_model_count %}
+                                            <span class="text-danger">{{ item.1.case_model_count }}
+                                                <span class="text-warning p-0 m-0 text-center">
+                                                    <small>
+                                                        {% if item.1.case_model_count < item.0.case_model_count %}
+                                                            {% with num1=item.0.case_model_count num2=item.1.case_model_count %}
+                                                                <i class="fa-solid fa-plus-minus fa-xs"></i>{{ num1|subtract:num2 }}
+                                                            {% endwith %}
+                                                        {% endif %}
+                                                    </small>
+                                                </span>
+                                            </span>
+                                        {% else %}
+                                            {{ item.1.case_model_count }}
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center">{{ item.1.location.location }}</td>
+                                    <td class="text-center">{{ item.1.stack_num }}</td>
+                                    <th class="text-center text-success">Matched</th>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% endif %}
+                <!-- Table Result End-->
+            </div>
+        </div>
+    </section>
+    
+</div>             
+</main>
+
+
+
+
+{% endblock %}

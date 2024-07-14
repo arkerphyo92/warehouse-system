@@ -1,0 +1,201 @@
+{% extends "frontend/base.html" %}
+{% load static %}
+
+{% block title %}
+Creating Delivery Plan
+{% endblock %}
+
+{% block content %}
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="{% url 'frontend:index' %}">Rainbow Cat Alhpa</a>
+    <!-- Sidebar Toggle-->
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+    <!-- Navbar Search-->
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+    <!-- Navbar-->
+    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#!">Settings</a></li>
+                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#!">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+  </nav>
+  <div id="layoutSidenav">
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" href="{% url 'frontend:index' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard
+                    </a>
+                    <div class="sb-sidenav-menu-heading">Services</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsReceiving" aria-expanded="false" aria-controls="collapseLayoutsReceiving">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-video"></i></div>
+                        Receiving
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutsReceiving" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'frontend:receiving' %}">Data Recording</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsDelivering" aria-expanded="true" aria-controls="collapseLayoutsReceiving">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-table"></i></div>
+                        Delivering
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse show" id="collapseLayoutsDelivering" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link active" href="{% url 'frontend:delivery_add_data' %}">Create Delivery Data</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-database"></i></div>
+                        Data Analysing
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'frontend:receiving_search' %}">Searching</a>
+                            <a class="nav-link" href="{% url 'frontend:compare_view' %}">Comparing</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Pages
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                Authentication
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="login.html">Login</a>
+                                    <a class="nav-link" href="register.html">Register</a>
+                                    <a class="nav-link" href="password.html">Forgot Password</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                Error
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="401.html">401 Page</a>
+                                    <a class="nav-link" href="404.html">404 Page</a>
+                                    <a class="nav-link" href="500.html">500 Page</a>
+                                </nav>
+                            </div>
+                        </nav>
+                    </div>                    
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                Administrator
+            </div>
+        </nav>
+    </div>
+    <div id="layoutSidenav_content" class="bg-secondary bg-opacity-25">
+        <main>
+            <div class="container-fluid px-4 col-xl-6 col-lg-8 col-md-8 offset-lg-2 offset-xl-3 offset-md-2">
+                <h3 class="mt-4 text-delivery text-center">Delivering Services</h3>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active"></li>
+                </ol>
+                {% if messages %}
+                                {% for message in messages %}
+                                    {% if message.tags == 'success' %}
+                                        <div class="alert alert-success my-3">
+                                            <ul class="messages m-0">
+                                                <li>{{ message }}</li>
+                                            </ul>
+                                        </div>
+                                    {% else %}
+                                        <div class="alert alert-danger my-3">
+                                            <ul class="messages m-0">
+                                                <li>{{ message }}</li>
+                                            </ul>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                               
+                <!-- Comparing Box Section Start -->
+                    <section class="mb-4">
+                        <div class="card mb-4">
+                            <div class="card-header text-center py-3">
+                                <h5 class="mb-0 text-center">
+                                    <strong>Adding Excel Delivery Plan</strong>
+                                </h5>
+                                </div>
+                            
+                            <div class="card-body"> 
+                                <form method="post" action="{% url 'frontend:delivery_add_data' %}" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {{ WarehouseFileFormSet2.management_form }}
+                                    {{ WarehouseFileFormSet2.non_field_errors }}
+                                    <div class='row mb-3 py-3 mx-auto form-item'>
+                                    {% for form in WarehouseFileFormSet2 %}
+                                        <div class="form-group">
+                                            {{ form.non_field_errors }}
+                                            <div>
+                                                {{ form.filename.label_tag }}
+                                                {{ form.filename }}
+                                                {% if form.filename.errors %}
+                                                    <div class="alert alert-danger m-0 pt-2 p-0">{{ form.filename.errors }}</div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="m-3">
+                                                {{ form.file.label_tag }}
+                                                {{ form.file }}
+                                                {% if form.file.errors %}
+                                                    <div class="alert alert-danger m-0 pt-2 p-0">{{ form.file.errors }}</div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                
+                                    
+                                        <div class="form-group">
+                                            <div class="form-group">
+                                                <label for="{{ inventory_upload_form.excel_file.id_for_label }}">Excel File:</label>
+                                                {{ inventory_upload_form.excel_file }}
+                                                {% if inventory_upload_form.excel_file.errors %}
+                                                    <div class="alert alert-danger m-0 pt-2 p-0">{{ inventory_upload_form.excel_file.errors }}</div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="align-middle mt-3">
+                                            <button type="submit" class="btn btn-delivery col-12 float-end align-middle mt-2">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </section>
+                 <!-- Comparing Box Section End -->                 
+            </div>             
+        </main>
+        
+    
+
+
+{% endblock %}

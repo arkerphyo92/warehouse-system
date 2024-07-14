@@ -1,0 +1,368 @@
+{% extends "frontend/base.html" %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}
+Receiving Data Collection
+{% endblock %}
+
+{% block content %}
+
+<!-- For Every Pages Start -->
+<!-- Nav Bar Start-->
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+    <!-- Navbar Brand-->
+    <a class="navbar-brand ps-3" href="index.html">Honda Repir</a>
+    <!-- Sidebar Toggle-->
+    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+    <!-- Navbar Search-->
+    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+        <div class="input-group">
+            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+    <!-- Navbar-->
+    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#!">Settings</a></li>
+                <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#!">Logout</a></li>
+            </ul>
+        </li>
+    </ul>
+  </nav>
+  <div id="layoutSidenav">    
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" href="{% url 'frontend:index' %}">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard
+                    </a>
+                    <div class="sb-sidenav-menu-heading">Services</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsReceiving" aria-expanded="false" aria-controls="collapseLayoutsReceiving">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Receiving
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutsReceiving" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'frontend:receiving' %}">Start Session</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsDelivering" aria-expanded="false" aria-controls="collapseLayoutsReceiving">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-table"></i></div>
+                        Delivering
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayoutsDelivering" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'frontend:delivery_add_data' %}">Start Session</a>
+                        </nav>
+                    </div>
+                    <div class="sb-sidenav-menu-heading">Interface</div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                        Comparison
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="{% url 'frontend:delivery_add_data' %}">Add New Inventory</a>
+                            <a class="nav-link" href="{% url 'frontend:add_new' %}">Add New Images</a>
+                            <a class="nav-link" href="{% url 'frontend:compare_view' %}">Comparing</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Pages
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                                Authentication
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="login.html">Login</a>
+                                    <a class="nav-link" href="register.html">Register</a>
+                                    <a class="nav-link" href="password.html">Forgot Password</a>
+                                </nav>
+                            </div>
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
+                                Error
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+                                <nav class="sb-sidenav-menu-nested nav">
+                                    <a class="nav-link" href="401.html">401 Page</a>
+                                    <a class="nav-link" href="404.html">404 Page</a>
+                                    <a class="nav-link" href="500.html">500 Page</a>
+                                </nav>
+                            </div>
+                        </nav>
+                    </div>                    
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                Administrator
+            </div>
+        </nav>
+    </div>
+<!-- Nav Bar End-->
+
+
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4">
+            
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'success' %}
+                            <div class="alert alert-success mt-3 mb-0 pb-0">
+                                <ul class="messages">
+                                    <li>{{ message }}</li>
+                                </ul>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            <h3 class="mt-4">Receiving (Step - One)
+
+            </h3>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item active"></li>
+            </ol>
+            
+
+</div>             
+</main>
+
+<!-- For Every Pages End -->
+
+<div>
+    <main>
+        <div class="container-fluid px-4">
+        <section class="mb-4">
+                    
+            <div class="card text-white bg-opacity-75 bg-primary">                
+                    <div class="card-header text-center py-3">
+                    <h5 class="mb-0 text-center">
+                        <strong>Data Collection for Cases</strong>
+                    </h5>
+                    </div>
+                <div class="card-body">                  
+                    <form class="align-items-center" method="POST">
+                        {% csrf_token %}
+                        <div class="container">
+                            <div class="row">               
+                                <div class="mb-3 col-md-6">
+                                    <label for="location" class="form-label">Select Location :</label>
+                                    <select class="form-select" for="location" name="location" id="location" required>
+                                        <option value="">Select Location</option>
+                                        {% for location in location_lists %}
+                                            <option value="{{ location }}" {% if location == selected_location %} selected {% endif %}>{{ location }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-md-6">
+                                    <label for="stack_number" class="form-label">Select Stack Number :</label>
+                                    <select class="form-select" for="stack_number" name="stack_number" id="stack_number" required>
+                                        <option value="">Select Stack Number</option>
+                                        {% for stack in stack_num_lists %}
+                                            <option value="{{ stack }}" {% if stack == selected_stack_number %} selected {% endif %}>{{ stack }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-md-2">
+                                    <label for="trip_number" class="form-label">Trip</label>
+                                    <input value="{% if inputed_trip_number %}{{inputed_trip_number}}{% endif %}" type="text" class="form-control" name="trip_number" id="trip_number" required>
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label for="container_num" class="form-label">Container Number</label>
+                                    <input value="{% if inputed_container_num %}{{inputed_container_num}}{% endif %}" type="text" class="form-control" name="container_num" id="container_num" required>
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label for="invoice_num" class="form-label">Invoice Number :</label>
+                                    <input value="{% if inputed_invoice_num %}{{inputed_invoice_num}}{% endif %}" type="text" class="form-control" name="invoice_num" id="invoice_num" required>
+                                </div>
+                                <div class="mb-3 col-md-2">
+                                    <label for="plate_num" class="form-label">Plate Number :</label>
+                                    <input value="{% if inputed_plate_number %}{{inputed_plate_number}}{% endif %}" type="text" class="form-control" name="plate_num" id="plate_num" required>
+                                </div>
+                                
+                            
+                            </div>
+
+                            <div class="mb-1 d-flex justify-content-center align-items-center">
+                                <div>
+                                    <button data-mdb-ripple-init type="submit" class="btn btn-primary mt-4 px-5">Next Step</button>
+                                </div>
+                        </div>
+                        </div>
+                    </form>
+                    <!-- Must choose both select to submit form (Filter)-->
+                    
+                </div>
+            
+            <!-- Result Start -->
+                    <div class="card-body">
+                        
+                        {% if selected_case_image_Name %}
+                        <div class="alert alert-primary" role="alert">
+                            <div class="row">
+                                <div class="col-md-9 text-lg-left text-md-left text-sm-left"><strong>{{selected_images_list|length }} Images included
+                                    {% comment %} {% for image in selected_images_list %}
+                                        {{ image.name }} /
+                                    {% endfor %}) {% endcomment %}
+                                    in {{selected_case_image_Name}}
+                                </strong>
+                                </div>
+                                <div class="col-md-3 text-lg-right text-md-right text-sm-center"><strong>Compared Inventory - {{selected_warehouse_file_name}}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        {% if selected_case_image_Name %}
+                            <div class="table-responsive">
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center align-middle">Model</th>
+                                            <th class="text-center align-middle">Case Count<br><small class="text-muted">(Images)</small></th>
+                                            <th class="text-center align-middle">Location<br><small class="text-muted">(Images)</small></th>
+                                            <th class="text-center align-middle">Stack No.<br><small class="text-muted">(Images)</small></th>
+                                            <th class="text-center align-middle">Case Count<br><small class="text-muted">(Warehouse)</small></th>
+                                            <th class="text-center align-middle">Location<br><small class="text-muted">(Warehouse)</small></th>
+                                            <th class="text-center align-middle">Stack No.<br><small class="text-muted">(Warehouse)</small></th>
+                                            <th class="text-center align-middle">Remark</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in only_in_cases_list %}
+                                            <tr>
+                                                <td class="text-center text-danger">{{ item.case_model }}</td>
+                                                <td class="text-center text-danger">{{ item.case_model_count }}</td>
+                                                <td class="text-center text-danger">{{ item.data_for_imagecase_image.location.location }}</td>
+                                                <td class="text-center text-danger">{{ item.data_for_imagecase_image.stack_num }}</td>
+                                                <td class="text-center">-</td>
+                                                <td class="text-center">-</td>
+                                                <td class="text-center">-</td>
+                                                <th class="text-center text-danger">AI</th>
+                                            </tr>
+                                        {% endfor %}
+                                        {% if only_in_warehouse_data %}
+                                            {% for item in only_in_warehouse_data %}
+                                                <tr class="text-danger">
+                                                    <td class="text-center text-danger">{{ item.case_model }}</td>
+                                                    <td class="text-center">-</td>
+                                                    <td class="text-center">-</td>
+                                                    <td class="text-center">-</td>
+                                                    <td class="text-center text-danger">{{ item.case_model_count }}</td>
+                                                    <td class="text-center text-danger">{{ item.location.location }}</td>
+                                                    <td class="text-center text-danger">{{ item.stack_num }}</td>
+                                                    <th class="text-center text-danger">Inventory</th>
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            <tr class="text-danger">
+                                                <th colspan="8" class="text-center text-danger">No Data Exist in {{ selected_warehouse_file_name }}</th>
+                                            </tr>
+                                        {% endif %}
+                                        {% for item in in_both %}
+                                            <tr>                                                
+                                                {% if item.0.case_model_count != item.1.case_model_count%}
+                                                    <td class="text-center text-warning">
+                                                {% else %}
+                                                    <td class="text-center text-success">
+                                                {% endif %}
+                                                    {{ item.0.case_model }}
+                                                    </td>
+                                                <td class="text-center text-success">{% if item.0.case_model_count != item.1.case_model_count%}                                                        
+                                                    <span class="text-danger">{{ item.0.case_model_count }}  
+                                                        <span class="text-warning p-0 m-0"><small> (
+                                                            {% if item.1.case_model_count < item.0.case_model_count %} 
+                                                                {% with num1=item.0.case_model_count num2=item.1.case_model_count %}
+                                                                <i class="fas fa-caret-up me-1"></i>{{ num1|subtract:num2 }})</p>
+                                                                {% endwith %}
+                                                            {% endif %}
+                                                            </small>
+                                                        </span>
+                                                    </span>
+                                                    {% else %}
+                                                            {{ item.1.case_model_count }}
+                                                    {% endif %}
+                                                </td>
+                                                {% if item.0.case_model_count != item.1.case_model_count%}
+                                                    <td class="text-center text-warning">
+                                                {% else %}
+                                                    <td class="text-center text-success">
+                                                {% endif %}
+                                                    {{ item.0.data_for_imagecase_image.location.location }}
+                                                    </td>
+                                                    {% if item.0.case_model_count != item.1.case_model_count%}
+                                                    <td class="text-center text-warning">
+                                                {% else %}
+                                                    <td class="text-center text-success">
+                                                {% endif %}
+                                                    {{ item.0.data_for_imagecase_image.stack_num }}
+                                                    </td>                                    
+                                                <td class="text-center text-success">
+                                                    {% if item.0.case_model_count != item.1.case_model_count%}                                                        
+                                                        <span class="text-danger">{{ item.1.case_model_count }}  
+                                                            <span class="text-warning p-0 m-0"><small> (
+                                                                {% if item.1.case_model_count < item.0.case_model_count %} 
+                                                                    {% with num1=item.0.case_model_count num2=item.1.case_model_count %}
+                                                                    <i class="fas fa-caret-down me-1"></i>{{ num1|subtract:num2 }})</p>
+                                                                    {% endwith %}
+                                                                {% endif %}
+                                                                </small>
+                                                            </span>
+                                                        </span>
+                                                    {% else %}
+                                                            {{ item.1.case_model_count }}
+                                                    {% endif %}
+                                                </td>
+                                                {% if item.0.case_model_count != item.1.case_model_count%}
+                                                    <td class="text-center text-warning">
+                                                {% else %}
+                                                    <td class="text-center text-success">
+                                                {% endif %}
+                                                    {{ item.1.location.location }}
+                                                    </td>
+                                                {% if item.0.case_model_count != item.1.case_model_count%}
+                                                    <td class="text-center text-warning">
+                                                {% else %}
+                                                    <td class="text-center text-success">
+                                                {% endif %}
+                                                    {{ item.1.stack_num }}
+                                                    </td>
+                                                    {% if item.0.case_model_count != item.1.case_model_count%}
+                                                    <td class="text-center text-warning">
+                                                {% else %}
+                                                    <td class="text-center text-success">
+                                                {% endif %}Common</th>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table> 
+                            </div>
+                        {% endif %}
+                    {% endif %}    
+                </div>
+            </div>
+                <!-- Result End -->
+        </section>
+    </div>
+</main>
+</div>
+
+{% endblock %}
